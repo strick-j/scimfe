@@ -1,0 +1,12 @@
+# See: 'config.example.yml'
+
+server:
+  listen: :8080
+  user_rps_limit: 120
+
+db:
+  address: postgres://scimfe:scimfe@localhost:5432/scimfe
+  migrations_dir: db/migrations
+
+redis:
+  address: localhost:6379

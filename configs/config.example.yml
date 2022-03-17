@@ -1,0 +1,63 @@
+#
+# Configuration example. Use 'config.dev.yaml' for local development.
+#
+
+# API Server configuration
+server:
+  # Network interface to listen
+  listen: :8080
+
+  # Request read timeout
+  #read_timeout: 30s
+
+  # Request write timeout
+  #write_timeout: 30s
+
+  # Rate limiter settings
+  #
+  # Max requests per second for one IP address.
+  # Better to configure this on proxy-pass side.
+  #user_rps_limit: 120
+
+  # Token bucket expiration time for rate-limiter
+  #token_bucket_ttl: 720h
+
+
+# Database
+db:
+  # PostgreSQL connection params.
+  # Can be passed in URL or DSN format.
+  #
+  # Example DSN:
+  #   user=jack password=secret host=pg.example.com port=5432 dbname=mydb sslmode=verify-ca pool_max_conns=10
+  # Example URL:
+  #   postgres://jack:secret@pg.example.com:5432/mydb?sslmode=verify-ca&pool_max_conns=10
+  #
+  # Additional pool-related options:
+  #   pool_max_conns: integer greater than 0
+  #   pool_min_conns: integer 0 or greater
+  #   pool_max_conn_lifetime: duration string
+  #   pool_max_conn_idle_time: duration string
+  #   pool_health_check_period: duration string
+  address: postgres://user:pass@localhost:5432/ledger
+
+  # Path to directory containing migration scripts
+  #migrations_dir: db/migrations
+
+  # Name of a table, which used to store database version
+  #version_table: public.schema_version
+
+  # Force set schema version (optional).
+  # Can be used to rollback schema to previous version.
+  #schema_version: 2
+
+# Redis config
+redis:
+  # Address
+  address: localhost:6379
+
+  # Database (optional)
+  #db: 1
+
+  # Password (optional)
+  #password: password
