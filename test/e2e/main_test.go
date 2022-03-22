@@ -37,7 +37,7 @@ func formatClientUrl(addr string) string {
 }
 
 func TestMain(m *testing.M) {
-	cfg, err := app.ProvideConfig("../../configs/config.dev.yaml")
+	cfg, err := app.ProvideConfig("../../configs/config.dev.yml")
 	if err != nil {
 		log.Fatal("Failed to read dev config:", err)
 	}
