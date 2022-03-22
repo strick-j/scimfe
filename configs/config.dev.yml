@@ -6,7 +6,7 @@ server:
 
 db:
   address: postgres://scimfe:scimfe@localhost:5432/scimfe
-  migrations_dir: db/migrations
+  migrations_dir: deployments/db/migrations
 
 redis:
   address: localhost:6379
