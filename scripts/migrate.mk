@@ -1,4 +1,4 @@
-MIGRATIONS_DIR ?= db/migrations
+MIGRATIONS_DIR ?= deployments/db/migrations
 GOMIGRATE ?= migrate
 
 # see: https://github.com/golang-migrate/migrate/issues/96
