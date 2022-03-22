@@ -30,11 +30,11 @@ func (cfg ServerConfig) ListenParams() web.ListenParams {
 }
 
 type Database struct {
-	Address             string `envconfig:"LGR_DB_ADDRESS" default:"postgres://localhost:5432/ledger" yaml:"address"`
-	MigrationsDirectory string `envconfig:"LGR_MIGRATIONS_DIR" default:"db/migrations" yaml:"migrations_dir"`
-	VersionTable        string `envconfig:"LGR_VERSION_TABLE" default:"schema_migrations" yaml:"version_table"`
-	SchemaVersion       uint   `envconfig:"LGR_SCHEMA_VERSION" yaml:"schema_version"`
-	SkipMigration       bool   `envconfig:"LGR_NO_MIGRATION" yaml:"skip_migration"`
+	Address             string `envconfig:"SCIMFE_DB_ADDRESS" default:"postgres://localhost:5432/scimfe" yaml:"address"`
+	MigrationsDirectory string `envconfig:"SCIMFE_MIGRATIONS_DIR" default:"deployments/db/migrations" yaml:"migrations_dir"`
+	VersionTable        string `envconfig:"SCIMFE_VERSION_TABLE" default:"schema_migrations" yaml:"version_table"`
+	SchemaVersion       uint   `envconfig:"SCIMFE_SCHEMA_VERSION" yaml:"schema_version"`
+	SkipMigration       bool   `envconfig:"SCIMFE_NO_MIGRATION" yaml:"skip_migration"`
 }
 
 func (dbs Database) PoolConfig() (*pgxpool.Config, error) {
