@@ -5,39 +5,39 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 --
 -- Email limit is 254 chars according to RFC 5321, don't ask me who need such long mail.
 -- Password is encrypted using bcrypt, which is always has 60 chars.
-CREATE TABLE "users"
+CREATE TABLE IF NOT EXISTS users
 (
-    "id"       uuid PRIMARY KEY    NOT NULL DEFAULT uuid_generate_v4(),
-    "email"    VARCHAR(254) UNIQUE NOT NULL,
-    "name"     VARCHAR(64)         NOT NULL,
-    "password" CHAR(60)            NOT NULL
+    "id" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    "email" VARCHAR(254) UNIQUE NOT NULL,
+    "name" VARCHAR(64) NOT NULL,
+    "password" CHAR(60) NOT NULL
 );
 
 -- Pamusers table
 -- 
 -- Used to store information retrieved from PAM SCIM Server
-CREATE TABLE "pamusers"
+CREATE TABLE IF NOT EXISTS pamusers
 (
-    "id"            INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
-    "username"      varchar(100),
-    "displayname"   varchar(100),
-    "usertype"      varchar(50),
-    "active"        bool,
-    "user_id"       INT             NOT NULL,
-    "entitlements"  text[],
-    "schemas"       text[]
+    "id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
+    "username" VARCHAR(100),
+    "displayname" VARCHAR(100),
+    "usertype" VARCHAR(50),
+    "active" BOOL,
+    "user_id" INT NOT NULL,
+    "entitlements" TEXT[],
+    "schemas" TEXT[]
 );
 
 -- Name table
 -- 
 -- References Pamusers
 -- Used to store name information for users retrieved from PAM SCIM Server
-CREATE TABLE "name"
+CREATE TABLE IF NOT EXISTS name
 (
-    "name_id"       INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
-    "user_id"       INT             NOT NULL,
-    "givenname"     varchar(100),
-    "familyname"    varchar(100),
+    "name_id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
+    "user_id"  INT NOT NULL,
+    "givenname" VARCHAR(64),
+    "familyname" VARCHAR(64),
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)
             REFERENCES pamusers(user_id)
@@ -48,14 +48,14 @@ CREATE TABLE "name"
 -- 
 -- References Pamusers
 -- Used to store meta information for users retrieved from PAM SCIM Server
-CREATE TABLE "meta"
+CREATE TABLE IF NOT EXISTS meta
 (
-    "meta_id"       INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
-    "user_id"       INT,
-    "resourceType"  varchar(100),
-    "created"       timestamp,
-    "lastModified"  timestamp,
-    "location"      varchar(200),
+    "meta_id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
+    "user_id" INT,
+    "resourceType" VARCHAR(100),
+    "created" TIMESTAMP,
+    "lastModified" TIMESTAMP,
+    "location" VARCHAR(200),
     PRIMARY KEY(meta_id),
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)
@@ -66,10 +66,10 @@ CREATE TABLE "meta"
 -- Auth table
 -- 
 -- Used to store auth information for Oauth2 Token
-CREATE TABLE "auth"
+CREATE TABLE IF NOT EXISTS auth
 (
-    "id"            INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
-    "access_token"  text            NOT NULL,
-    "token_type"    varchar(50)     NOT NULL,
-    "expiry"        timestamp       NOT NULL
+    "id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
+    "access_token" TEXT NOT NULL,
+    "token_type" VARCHAR(50) NOT NULL,
+    "expiry" TIMESTAMP NOT NULL
 );
