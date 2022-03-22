@@ -21,7 +21,7 @@ CREATE TABLE "pamusers"
     "id" INT GENERATED ALWAYS AS IDENTITY,
     "username" varchar(100),
     "displayname" varchar(100),
-    "usertype" varchar(50)
+    "usertype" varchar(50),
     "active" bool,
     "user_id" INT,
     "entitlements" text[],
