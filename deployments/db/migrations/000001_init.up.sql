@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS pamusers
     "displayname" VARCHAR(100),
     "usertype" VARCHAR(50),
     "active" BOOL,
-    "user_id" INT NOT NULL,
+    "user_id" INT UNIQUE NOT NULL,
     "entitlements" TEXT[],
     "schemas" TEXT[]
 );
