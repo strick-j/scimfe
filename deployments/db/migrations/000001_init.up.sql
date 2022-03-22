@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS pamusers
 -- 
 -- References Pamusers
 -- Used to store name information for users retrieved from PAM SCIM Server
-CREATE TABLE IF NOT EXISTS name
+CREATE TABLE IF NOT EXISTS pamuser_name
 (
     "name_id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
     "user_id"  INT NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS name
 -- 
 -- References Pamusers
 -- Used to store meta information for users retrieved from PAM SCIM Server
-CREATE TABLE IF NOT EXISTS meta
+CREATE TABLE IF NOT EXISTS pamuser_meta
 (
     "meta_id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
     "user_id" INT,
@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS meta
     "created" TIMESTAMP,
     "lastModified" TIMESTAMP,
     "location" VARCHAR(200),
-    PRIMARY KEY(meta_id),
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)
             REFERENCES pamusers(user_id)
