@@ -8,7 +8,7 @@ include scripts/golangci.mk
 
 .PHONY: run
 run:
-	go run ./cmd/scimfe -config /configs/config.dev.yaml
+	go run ./cmd/scimfe -config ./configs/config.dev.yml
 
 	.PHONY: e2e
 e2e:
