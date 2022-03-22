@@ -12,8 +12,8 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/jmoiron/sqlx"
 	"github.com/stretchr/testify/require"
-	"github.com/strick-j/internal/app"
-	"github.com/strick-j/pkg/scimfe"
+	"github.com/strick-j/scimfe/internal/app"
+	"github.com/strick-j/scimfe/pkg/scimfe"
 )
 
 //
