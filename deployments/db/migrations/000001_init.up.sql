@@ -9,7 +9,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- Password is encrypted using bcrypt, which is always has 60 chars.
 CREATE TABLE IF NOT EXISTS users
 (
-    "id" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    "id" UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
     "email" VARCHAR(254) UNIQUE NOT NULL,
     "name" VARCHAR(64) NOT NULL,
     "password" CHAR(60) NOT NULL
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users
 -- Ex: action: add, resourcetype: Group, Success: True
 CREATE TABLE IF NOT EXISTS actions
 (
-    "id" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    "id" UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
     "action" VARCHAR(254) UNIQUE NOT NULL,
     "resourceType" VARCHAR(64) NOT NULL,
     "success" BOOL NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS pamuser
 CREATE TABLE IF NOT EXISTS pamuser_name
 (
     "name_id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
-    "id"  INT NOT NULL,
+    "id" INT NOT NULL,
     "givenname" VARCHAR(64),
     "middlename" VARCHAR(64),
     "familyname" VARCHAR(64),
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS pamuser_name
 -- Used to store pam user email information for users retrieved from PAM SCIM Server
 CREATE TABLE IF NOT EXISTS pamuser_emails
 (
-    "email_id" INT PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    "email_id" UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
     "id" INT,
     "name" VARCHAR(64),
     "primary" BOOL,
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS pamuser_emails
 -- Used to store pam user email information for users retrieved from PAM SCIM Server
 CREATE TABLE IF NOT EXISTS pamuser_phonenumbers
 (
-    "phonenumber_id" INT PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    "phonenumber_id" UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
     "id" INT,
     "name" VARCHAR(64),
     "primary" BOOL,
@@ -148,15 +148,14 @@ CREATE TABLE IF NOT EXISTS pamuser_groups
 -- Used to store pam user meta information for users retrieved from PAM SCIM Server
 CREATE TABLE IF NOT EXISTS pamuser_meta
 (
-    "meta_id" INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY,
-    "user_id" INT,
+    "id" INT NOT NULL,
     "resourceType" VARCHAR(100),
     "created" TIMESTAMP,
     "lastModified" TIMESTAMP,
     "location" VARCHAR(200),
     CONSTRAINT fk_user
-        FOREIGN KEY(user_id)
-            REFERENCES pamuser(user_id)
+        FOREIGN KEY(id)
+            REFERENCES pamuser(id)
             ON DELETE CASCADE
 );
 
