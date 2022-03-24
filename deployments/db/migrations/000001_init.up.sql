@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS actions
     "action" VARCHAR(254) UNIQUE NOT NULL,
     "resourceType" VARCHAR(64) NOT NULL,
     "success" BOOL NOT NULL,
-    "time" CURRENT_TIMESTAMP
+    "time" TIMESTAMP NOT NULL
 );
 
 -- Auth table
