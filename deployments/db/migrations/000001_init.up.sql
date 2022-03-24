@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS pamuser_emails
     "primary" BOOL,
     "display" VARCHAR(64),
     "value" VARCHAR(254),
-    "$ref",
+    "ref" TEXT,
     CONSTRAINT fk_user
         FOREIGN KEY(id)
             REFERENCES pamuser(id)
