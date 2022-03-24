@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS auth
 -- SCIM 2.0 Schema: https://datatracker.ietf.org/doc/html/rfc7643
 -- CyberArk PAM Schema: https://identity-developer.cyberark.com/docs/manage-pam-objects-with-scim-endpoints
 
--- SCIM PAM User Tables ------------------------------------------------------------------------------------------
+-- SCIM PAM Parent Tables ------------------------------------------------------------------------------------------
 
 -- Pamuser table
 -- 
@@ -64,6 +64,18 @@ CREATE TABLE IF NOT EXISTS pamuser
     "locale" VARCHAR(64),
     "timezone" VARCHAR(16),
     "active" BOOL,
+    "entitlements" TEXT[],
+    "schemas" TEXT[]
+);
+
+-- Pamgroup table
+-- 
+-- Used to store group information retrieved from PAM SCIM Server
+CREATE TABLE IF NOT EXISTS pamgroup
+(
+    "id" INT PRIMARY KEY UNIQUE NOT NULL,
+    "displayname" VARCHAR(100),
+    "external_id" TEXT,
     "entitlements" TEXT[],
     "schemas" TEXT[]
 );
@@ -157,21 +169,6 @@ CREATE TABLE IF NOT EXISTS pamuser_meta
         FOREIGN KEY(id)
             REFERENCES pamuser(id)
             ON DELETE CASCADE
-);
-
-
--- SCIM PAM Group Tables ------------------------------------------------------------------
-
--- Pamgroup table
--- 
--- Used to store group information retrieved from PAM SCIM Server
-CREATE TABLE IF NOT EXISTS pamgroup
-(
-    "id" INT PRIMARY KEY UNIQUE NOT NULL,
-    "displayname" VARCHAR(100),
-    "external_id" TEXT,
-    "entitlements" TEXT[],
-    "schemas" TEXT[]
 );
 
 -- Pamgroup_members table
