@@ -132,15 +132,10 @@ CREATE TABLE IF NOT EXISTS pamuser_phonenumbers
 -- Used to store pam user group information for users retrieved from PAM SCIM Server
 CREATE TABLE IF NOT EXISTS pamuser_groups
 (
-    "id" INT,
     "type" VARCHAR(64),
     "display" VARCHAR(64),
     "value" INT,
     "ref" TEXT,
-    CONSTRAINT fk_user
-        FOREIGN KEY(id)
-            REFERENCES pamuser(id)
-            ON DELETE CASCADE
     CONSTRAINT fk_group
         FOREIGN KEY(value)
             REFERENCES pamgroup(id)
